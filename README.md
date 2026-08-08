@@ -91,7 +91,8 @@ every other CTA on the page is already a bare `wa.me` link.
    change it in the `.wordmark` markup and the `.hero__watermark`.
 5. **A photo of the training space**, if there is a fixed one. The site currently says
    "home or gym", which matches the brief.
-6. Favicon, OG share image, `robots.txt`, `sitemap.xml`, a 404 page.
+6. OG share image, `robots.txt`, `sitemap.xml`, a 404 page. (Favicon is done —
+   `assets/favicon-32.png` and `apple-touch-icon.png`, rendered from the logo mark.)
 
 ## Slot sizes
 
@@ -153,6 +154,20 @@ Deliberate departures from the kit, all for reasons:
   deepened cut of the ember ramp at rest (4.65:1 at its lightest vs 3.11:1). The
   `--ember-grad` token is untouched, so large fills keep the original brand ramp.
 - **Arrow micro-motion.** The `→` slides 3px on hover, on the kit's own `--ease-liquid`.
+- **A logo mark.** The kit says "no logo was provided… do not draw a mark", which was
+  guidance for a placeholder persona. The wordmark is now a lockup: an ember monogram
+  tile with a debossed barbell behind the letter, beside a two-line COACH / SWAPNIL.
+  Built entirely from CSS and type — no image asset, so it stays crisp at any size and
+  re-themes with the palette. `assets/favicon-*.png` are rasterised from the same mark.
+
+### A CSS comment that ate a rule
+
+`components.css` opened with a header comment containing `(components/**/*.jsx)`. The
+`**/` inside it **closes a CSS comment early**; the parser then treats the remaining
+comment text plus the next selector as one invalid selector and drops that whole rule.
+The rule immediately after that comment was `.wordmark` — so the wordmark had *never*
+been styled, which is why the logo looked like unstyled text. Do not put glob stars in
+CSS comments.
 
 ### About the imagery in `assets/`
 

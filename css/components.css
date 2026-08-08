@@ -1,18 +1,93 @@
 /* ============================================================================
    Marcus Reid — component layer
    Each block is a port of the matching component in the Claude Design project
-   (components/**/*.jsx), translated from inline React styles to CSS classes.
+   (components/GROUP/NAME.jsx), translated from inline React styles to CSS
+   classes. Note: no glob stars in this comment — a `**` followed by `/` closes
+   a CSS comment early and silently eats the rule that follows it.
    Values are kept identical unless a comment says otherwise.
    ========================================================================= */
 
-/* --- Wordmark (navigation/Wordmark.jsx) --------------------------------- */
+/* --- Logo lockup ---------------------------------------------------------
+   Replaces the kit's plain two-tone Wordmark. A monogram tile carrying the
+   ember gradient, next to a two-line wordmark: tiny letterspaced COACH over a
+   heavy SWAPNIL. Built entirely from tokens and type — no image asset, so it
+   stays crisp at any size and re-themes with the palette.
+
+   The bar across the monogram is the one drawn element: a barbell through the
+   letter, which is the only fitness cue the mark needs.
+   ---------------------------------------------------------------------- */
 .wordmark{
-  font-family:var(--font-display);font-weight:800;font-size:17px;
-  letter-spacing:0.05em;text-transform:uppercase;color:#fff;white-space:nowrap;
+  --logo-tile:36px;
+  --logo-name:17px;
+  display:inline-flex;align-items:center;gap:12px;
+  color:#fff;white-space:nowrap;text-decoration:none;
 }
-.wordmark em{color:var(--ember-500);font-style:normal}
-.wordmark--lg{font-size:28px}
+
+.wordmark__mark{
+  position:relative;flex:none;
+  width:var(--logo-tile);height:var(--logo-tile);
+  display:grid;place-items:center;
+  border-radius:calc(var(--logo-tile) * 0.28);
+  background:linear-gradient(145deg,#FF6A3D 0%,#E8391F 52%,#B32814 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.45),
+    inset 0 -1px 0 rgba(0,0,0,0.28),
+    0 4px 14px rgba(232,57,31,0.38);
+  overflow:hidden;
+  transition:box-shadow var(--dur-med) var(--ease-liquid),
+             transform var(--dur-med) var(--ease-liquid);
+}
+/* The monogram, above the bar. */
+.wordmark__mark span{
+  position:relative;z-index:2;
+  font-family:var(--font-display);font-weight:900;
+  font-size:calc(var(--logo-tile) * 0.58);
+  line-height:1;letter-spacing:0;color:#fff;
+  text-shadow:0 1px 2px rgba(90,20,11,0.45);
+}
+/* Barbell, debossed into the tile behind the letter. Drawn in shadow rather
+   than white so it reads as texture and the S keeps the contrast. */
+.wordmark__mark::before{
+  content:"";position:absolute;left:0;right:0;top:50%;z-index:1;
+  height:max(2px,calc(var(--logo-tile) * 0.055));
+  transform:translateY(-50%);
+  background:rgba(88,19,10,0.5);
+}
+.wordmark__mark::after{
+  content:"";position:absolute;left:0;right:0;top:50%;z-index:1;
+  height:max(8px,calc(var(--logo-tile) * 0.3));
+  transform:translateY(-50%);
+  background:linear-gradient(to right,
+    rgba(88,19,10,0.5) 0 13%,transparent 13% 87%,rgba(88,19,10,0.5) 87% 100%);
+}
+
+.wordmark__type{display:flex;flex-direction:column;justify-content:center}
+.wordmark__pre{
+  font-family:var(--font-body);font-weight:700;
+  font-size:calc(var(--logo-name) * 0.53);
+  letter-spacing:0.34em;text-transform:uppercase;
+  color:var(--ember-500);line-height:1;margin-bottom:4px;
+}
+.wordmark__name{
+  font-family:var(--font-display);font-weight:800;
+  font-size:var(--logo-name);letter-spacing:0.03em;
+  text-transform:uppercase;color:#fff;line-height:1;
+}
+
+.wordmark--lg{--logo-tile:48px;--logo-name:24px;gap:16px}
+
 a.wordmark:hover{color:#fff}
+a.wordmark:hover .wordmark__mark{
+  transform:translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    inset 0 -1px 0 rgba(0,0,0,0.28),
+    0 6px 20px rgba(232,57,31,0.55);
+}
+
+@media (max-width:420px){
+  .wordmark{--logo-tile:32px;--logo-name:15px;gap:10px}
+}
 
 /* --- Eyebrow (navigation/Wordmark.jsx) ---------------------------------- */
 .eyebrow{display:inline-flex;align-items:center;gap:8px}
