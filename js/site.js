@@ -203,6 +203,10 @@
 
   /* -- Scroll reveal ------------------------------------------------------- */
   function initReveal() {
+    // CSS scroll-driven animation is handling the reveal — see the tier note in
+    // layout.css. Observing here as well would fight it.
+    if (document.documentElement.classList.contains('css-scroll')) return;
+
     var items = document.querySelectorAll('[data-reveal]');
     if (!items.length) return;
 

@@ -629,15 +629,87 @@
 .faq details[open] summary::after{transform:rotate(45deg);color:var(--ember-500)}
 .faq details p{margin:0 0 24px;font-size:16px;color:rgba(255,255,255,0.78);line-height:var(--leading-prose);max-width:68ch}
 
-/* --- Scroll reveal ------------------------------------------------------- */
-[data-reveal]{
+/* --- Scroll reveal -------------------------------------------------------
+   Three tiers, best first:
+     1. Scroll-driven CSS — scrubbed to scroll position, runs off the main
+        thread. site.js skips its observer entirely when this is supported.
+     2. IntersectionObserver + transition — a binary trigger, works everywhere.
+     3. No JavaScript at all — everything simply visible.
+
+   Tier 3 is why the hide rule is scoped to .js-reveal, which is set on <html>
+   by an inline script in <head>. Previously [data-reveal] was hidden
+   unconditionally, so with scripting off the whole page below the hero
+   rendered invisible.
+   ------------------------------------------------------------------------ */
+.js-reveal [data-reveal]{
   opacity:0;transform:translateY(20px);
-  transition:opacity var(--dur-slow) var(--ease-liquid),transform var(--dur-slow) var(--ease-liquid);
+  transition:opacity var(--dur-slow) var(--ease-liquid),
+             transform var(--dur-slow) var(--ease-liquid);
   transition-delay:var(--reveal-delay,0ms);
 }
-[data-reveal].is-visible{opacity:1;transform:none}
+.js-reveal [data-reveal].is-visible{opacity:1;transform:none}
+
+@supports (animation-timeline:view()){
+  html.css-scroll [data-reveal]{
+    opacity:1;transform:none;transition:none;
+    animation:reveal-rise linear both;
+    animation-timeline:view();
+    /* Starts as the element enters and finishes well before centre, so copy is
+       fully legible by the time it is comfortably in frame. */
+    animation-range:entry 8% cover 26%;
+  }
+}
+@keyframes reveal-rise{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:none}
+}
+
 @media (prefers-reduced-motion:reduce){
-  [data-reveal]{opacity:1;transform:none}
+  .js-reveal [data-reveal],
+  html.css-scroll [data-reveal]{opacity:1;transform:none;animation:none}
+}
+
+/* --- Hero parallax -------------------------------------------------------
+   Layer separation as the hero scrolls away: the watermark lags behind (far),
+   the figure tracks slightly ahead (mid), the stat capsules move most (near).
+   Scroll-driven, so there is no scroll listener and no main-thread work.
+   ------------------------------------------------------------------------ */
+@supports (animation-timeline:scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .hero__watermark{
+      animation:hero-far linear both;
+      animation-timeline:scroll(root);
+      animation-range:0 100vh;
+    }
+  }
+  /* The figure and capsules are only absolutely positioned on desktop; below
+     900px they are in flow and shifting them would collide with the copy. */
+  @media (prefers-reduced-motion:no-preference) and (min-width:901px){
+    .hero__photo{
+      animation:hero-mid linear both;
+      animation-timeline:scroll(root);
+      animation-range:0 100vh;
+    }
+    .hero__stats{
+      animation:hero-near linear both;
+      animation-timeline:scroll(root);
+      animation-range:0 100vh;
+    }
+  }
+}
+@keyframes hero-far{
+  from{transform:translateY(0) scale(1)}
+  to{transform:translateY(96px) scale(1.06)}
+}
+/* Must carry the -44% X placement from .hero__photo, or the animation would
+   reset the figure to centre. */
+@keyframes hero-mid{
+  from{transform:translateX(-44%) translateY(0)}
+  to{transform:translateX(-44%) translateY(-30px)}
+}
+@keyframes hero-near{
+  from{transform:translateY(0)}
+  to{transform:translateY(-72px)}
 }
 
 /* Hero load-in: staggered, runs on paint rather than on scroll. */
