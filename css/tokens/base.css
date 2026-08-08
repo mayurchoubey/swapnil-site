@@ -1,0 +1,45 @@
+/* Marcus Reid — element defaults */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--surface-page);
+  color:var(--text-body);
+  font-family:var(--font-body);
+  font-size:var(--text-md);
+  line-height:var(--leading-body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:var(--fg-1);text-decoration:none;transition:color var(--dur-fast) var(--ease-liquid)}
+a:hover{color:var(--ember-500)}
+::selection{background:var(--ember-600);color:#fff}
+
+img{max-width:100%;display:block}
+button,input,select,textarea{font:inherit}
+
+/* Keyboard focus uses the token ring; pointer focus stays quiet. */
+:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--radius-xs)}
+
+/* Skip link — the nav is fixed, so keyboard users need a way past it. */
+.skip-link{
+  position:absolute;left:var(--page-pad);top:-100px;z-index:2000;
+  background:var(--ember-600);color:#fff;padding:12px 18px;border-radius:var(--radius-xs);
+  font-size:var(--text-label);font-weight:var(--weight-bold);letter-spacing:0.14em;text-transform:uppercase;
+  transition:top var(--dur-fast) var(--ease-liquid);
+}
+.skip-link:focus{top:16px;color:#fff}
+
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--black-0)}
+::-webkit-scrollbar-thumb{background:var(--black-3);border-radius:var(--radius-pill)}
+::-webkit-scrollbar-thumb:hover{background:var(--ember-700)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+}

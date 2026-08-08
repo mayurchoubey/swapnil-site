@@ -1,0 +1,37 @@
+/* Marcus Reid — color tokens (verbatim from the design system) */
+:root{
+/* Base */
+--black-0:#050506;--black-1:#0B0B0D;--black-2:#121214;--black-3:#1A1A1D;
+--white:#FFFFFF;
+--fg-1:#FFFFFF;--fg-2:rgba(255,255,255,0.68);--fg-3:rgba(255,255,255,0.45);--fg-4:rgba(255,255,255,0.28);
+/* Brand — ember red */
+--ember-400:#FF6A3D;--ember-500:#FF4B26;--ember-600:#E8391F;--ember-700:#C22C16;--ember-900:#5A140B;
+--ember-grad:linear-gradient(135deg,#FF5A2C 0%,#E8391F 55%,#C22C16 100%);
+--hero-grad:radial-gradient(120% 100% at 70% 20%,#E8391F 0%,#8F1F10 45%,#0B0B0D 100%);
+/* Semantic */
+--surface-page:var(--black-1);--surface-section:var(--black-0);--surface-card:var(--black-2);--surface-card-hover:var(--black-3);
+--surface-accent:var(--ember-600);
+--text-body:var(--fg-2);--text-heading:var(--fg-1);--text-muted:var(--fg-3);--text-on-accent:#FFFFFF;
+--text-accent:var(--ember-500);
+--border-subtle:rgba(255,255,255,0.08);--border-strong:rgba(255,255,255,0.16);--border-accent:rgba(255,90,44,0.5);
+--focus-ring:0 0 0 2px rgba(255,90,44,0.6);
+/* Liquid glass */
+--glass-bg:rgba(255,255,255,0.10);--glass-bg-strong:rgba(255,255,255,0.16);
+--glass-tint-ember:rgba(232,57,31,0.35);
+--glass-border:rgba(255,255,255,0.22);--glass-highlight:rgba(255,255,255,0.45);
+--glass-blur:blur(24px) saturate(160%);
+/* States */
+--success:#3DCB7A;--warning:#FFB03A;--danger:#FF4B26;
+
+/* --- Site extensions (not in the source kit) --- */
+/* Film grain used to keep the near-black surfaces from banding. */
+--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Stand-in for the brand's photography: near-black with warm ember rim
+   lighting from the upper right, per the imagery guideline ("dramatic gym
+   photography, warm red-tinted lighting on near-black, high contrast"). */
+/* Light-source position for the plate gradient. Override these per element to
+   vary a grid of placeholders — the gradient itself is composed in .plate
+   (components.css) rather than here, because a var() inside a custom property
+   resolves against the element that DECLARES it, not the one that uses it. */
+--plate-x:78%;--plate-y:6%;--plate-angle:116deg;
+}

@@ -1,0 +1,437 @@
+/* ============================================================================
+   Marcus Reid — component layer
+   Each block is a port of the matching component in the Claude Design project
+   (components/**/*.jsx), translated from inline React styles to CSS classes.
+   Values are kept identical unless a comment says otherwise.
+   ========================================================================= */
+
+/* --- Wordmark (navigation/Wordmark.jsx) --------------------------------- */
+.wordmark{
+  font-family:var(--font-display);font-weight:800;font-size:17px;
+  letter-spacing:0.05em;text-transform:uppercase;color:#fff;white-space:nowrap;
+}
+.wordmark em{color:var(--ember-500);font-style:normal}
+.wordmark--lg{font-size:28px}
+a.wordmark:hover{color:#fff}
+
+/* --- Eyebrow (navigation/Wordmark.jsx) ---------------------------------- */
+.eyebrow{display:inline-flex;align-items:center;gap:8px}
+.eyebrow::before{
+  content:"";width:5px;height:5px;border-radius:50%;
+  background:var(--ember-500);flex-shrink:0;
+}
+.eyebrow--muted{color:var(--fg-2)}
+
+/* --- Button (actions/Button.jsx) ---------------------------------------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 24px;font-size:11px;
+  font-family:var(--font-body);font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  border-radius:var(--radius-xs);border:1px solid transparent;
+  cursor:pointer;text-align:center;
+  transition:filter var(--dur-fast) var(--ease-liquid),
+             transform var(--dur-fast) var(--ease-liquid),
+             color var(--dur-fast) var(--ease-liquid),
+             background var(--dur-fast) var(--ease-liquid),
+             border-color var(--dur-fast) var(--ease-liquid);
+}
+.btn--sm{padding:10px 18px;font-size:10px}
+.btn--lg{padding:18px 32px;font-size:12px}
+
+/* Buttons carry an 11px bold label, which WCAG counts as normal text (4.5:1),
+   not large. The raw --ember-grad tops out at #FF5A2C, where white measures
+   3.1:1 — fine behind a 44px headline, not behind a small label. So buttons
+   use a deepened cut of the same ramp: 4.65:1 at its lightest, 5.7:1 at its
+   darkest. The token is left untouched for large fills. */
+.btn--primary{
+  background:linear-gradient(135deg,#D9371A 0%,#CF3317 55%,#C22C16 100%);
+  color:#fff;box-shadow:var(--shadow-accent);
+}
+.btn--secondary{background:transparent;color:#fff;border-color:var(--border-strong)}
+.btn--ghost{background:transparent;color:var(--fg-2);padding:0}
+.btn--glass{
+  background:var(--glass-bg);color:#fff;border-color:var(--glass-border);
+  border-radius:var(--radius-pill);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  box-shadow:var(--shadow-glass);
+}
+
+/* Hover deepens the fill and lifts the glow. The kit's brightness(1.12) washed
+   the ember toward orange while the white label had nowhere brighter to go, so
+   hovering actually REDUCED contrast — 4.17:1 down to 3.49:1 mid-gradient. */
+.btn:hover{transform:translateY(-1px)}
+.btn--primary:hover{
+  background:linear-gradient(135deg,#C22C16 0%,#B32814 55%,#A82412 100%);
+  box-shadow:0 10px 30px rgba(232,57,31,0.55);
+}
+.btn--secondary:hover{
+  background:rgba(255,255,255,0.07);
+  border-color:var(--border-accent);
+  color:#fff;
+}
+.btn--ghost:hover{color:var(--ember-400)}
+/* Glass buttons sit on the ember CTA band, so hover darkens rather than
+   lightens — brightening took the white label to 3.16:1. */
+.btn--glass:hover{
+  background:rgba(9,9,12,0.34);
+  border-color:rgba(255,255,255,0.48);
+}
+.btn:active{transform:scale(0.98)}
+.btn[disabled]{opacity:0.4;cursor:not-allowed;filter:none;transform:none}
+
+/* Trailing arrow. The glyph slides on hover — the one liberty taken with the
+   source component, and it matches the liquid easing. */
+.btn .arrow,.link-arrow .arrow{
+  display:inline-block;
+  transition:transform var(--dur-fast) var(--ease-liquid);
+}
+.btn:hover .arrow,.link-arrow:hover .arrow{transform:translateX(3px)}
+
+/* --- Arrow link (used inside cards) ------------------------------------- */
+.link-arrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--fg-2);
+}
+.link-arrow:hover{color:var(--ember-500)}
+
+/* --- Card (surfaces/Card.jsx) ------------------------------------------- */
+.card{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-xs);
+  padding:28px 24px;
+  color:var(--fg-2);
+  transition:background var(--dur-med) var(--ease-liquid),
+             transform var(--dur-med) var(--ease-liquid),
+             border-color var(--dur-med) var(--ease-liquid);
+}
+.card--hoverable:hover{background:var(--surface-card-hover);transform:translateY(-2px)}
+.card--highlight{
+  background:var(--ember-grad);border-color:transparent;color:#fff;
+  box-shadow:var(--shadow-accent);
+}
+
+/* --- Badge + Tag (feedback/Badge.jsx) ----------------------------------- */
+.badge{
+  display:inline-block;padding:5px 10px;font-size:10px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;border-radius:var(--radius-xs);
+  background:var(--ember-600);color:#fff;
+}
+.badge--neutral{background:var(--black-3);color:var(--fg-2);border:1px solid var(--border-subtle)}
+.badge--glass{
+  background:var(--glass-bg);color:#fff;border:1px solid var(--glass-border);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+}
+.tag{
+  display:inline-block;padding:6px 14px;font-size:11px;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);color:var(--fg-2);
+}
+
+/* --- Stat (content/Stat.jsx) -------------------------------------------- */
+.stat__value{
+  font-size:38px;font-weight:600;letter-spacing:-0.01em;color:#fff;line-height:1.1;
+  font-variant-numeric:tabular-nums;
+}
+.stat__value small{font-weight:400}
+.stat__label{
+  font-size:11px;color:rgba(255,255,255,0.75);line-height:1.45;
+  margin-top:6px;max-width:180px;
+}
+
+/* --- ProgramCard (content/ProgramCard.jsx) ------------------------------ */
+.program-card{
+  display:flex;flex-direction:column;min-height:200px;
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  padding:22px 22px 24px;
+  transition:background var(--dur-med) var(--ease-liquid),
+             transform var(--dur-med) var(--ease-liquid);
+}
+.program-card:hover{background:var(--surface-card-hover);transform:translateY(-2px)}
+.program-card__index{
+  font-size:12px;font-weight:600;color:var(--fg-3);
+  border-bottom:1px solid var(--border-subtle);padding-bottom:12px;
+  font-variant-numeric:tabular-nums;
+}
+.program-card h3{font-size:19px;margin:18px 0 10px;color:var(--fg-1);line-height:1.1}
+.program-card p{font-size:14px;line-height:1.58;color:var(--fg-3);margin:0;flex:1}
+/* Figures stay in Archivo with the rest of the numeric UI — it matches the
+   stat capsules and fee tables, and keeps tabular alignment. The serif is for
+   running text, not for prices. */
+.program-card__price{
+  font-family:var(--font-body) !important;
+  font-size:24px !important;font-weight:600;color:#fff !important;
+  letter-spacing:-0.01em;line-height:1;margin:16px 0 0 !important;flex:none !important;
+  font-variant-numeric:tabular-nums;
+}
+.program-card__price span{font-size:12px;font-weight:400;color:var(--fg-3);letter-spacing:0.04em}
+.program-card--highlight .program-card__price span{color:rgba(255,255,255,0.75)}
+.program-card .link-arrow{margin-top:18px}
+
+/* --- Fee table ---------------------------------------------------------- */
+.fees{width:100%;border-collapse:collapse;text-align:left}
+.fees caption{
+  text-align:left;font-size:11px;font-weight:700;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--text-accent);padding-bottom:18px;
+}
+.fees th,.fees td{padding:16px 20px;border-bottom:1px solid var(--border-subtle);vertical-align:top}
+.fees thead th{
+  font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--fg-4);padding-block:10px;
+}
+.fees tbody th{font-weight:400;font-size:14px;color:var(--fg-2)}
+.fees td{
+  font-size:17px;font-weight:600;color:#fff;white-space:nowrap;
+  font-variant-numeric:tabular-nums;text-align:right;
+}
+.fees td small{display:block;font-size:11px;font-weight:400;color:var(--fg-3);margin-top:4px}
+.fees tbody tr:last-child th,.fees tbody tr:last-child td{border-bottom:0}
+.fees tbody tr.is-featured th,.fees tbody tr.is-featured td{background:rgba(232,57,31,0.10)}
+.fees__note{font-size:13.5px;line-height:1.6;color:var(--fg-3);margin:16px 0 0}
+@media (max-width:560px){
+  .fees th,.fees td{padding:13px 12px}
+  .fees tbody th{font-size:13px}
+  .fees td{font-size:15px}
+}
+
+.program-card--highlight{
+  background:var(--ember-grad);border-color:transparent;box-shadow:var(--shadow-accent);
+}
+.program-card--highlight:hover{background:var(--ember-grad)}
+.program-card--highlight .program-card__index{color:#fff;opacity:0.8;border-bottom-color:rgba(255,255,255,0.3)}
+.program-card--highlight h3{color:#fff}
+.program-card--highlight p{color:rgba(255,255,255,0.85)}
+.program-card--highlight .link-arrow{color:#fff}
+
+/* --- ArticleCard (content/ArticleCard.jsx) ------------------------------ */
+.article-card{
+  display:block;overflow:hidden;
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  color:inherit;
+  transition:background var(--dur-med) var(--ease-liquid),
+             transform var(--dur-med) var(--ease-liquid);
+}
+.article-card:hover{transform:translateY(-2px);color:inherit}
+.article-card__media{position:relative;aspect-ratio:16/9;overflow:hidden}
+/* Direct children only — an <img> nested inside a .plate must not also scale,
+   or the two transforms compound to 1.08 on hover. */
+.article-card__media > .plate,
+.article-card__media > img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform var(--dur-slow) var(--ease-liquid);
+}
+.article-card:hover .article-card__media > .plate,
+.article-card:hover .article-card__media > img{transform:scale(1.04)}
+.article-card__media .badge{position:absolute;left:14px;bottom:12px;z-index:2}
+.article-card__body{padding:16px 18px 18px}
+.article-card h3{
+  font-size:15px;margin:0;color:#fff;text-transform:none;letter-spacing:0;
+  font-weight:700;line-height:1.35;
+}
+.article-card p{font-size:13.5px;line-height:1.58;color:var(--fg-3);margin:8px 0 0}
+.article-card__meta{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;margin-top:14px;
+}
+.article-card__date{font-size:11px;color:var(--fg-4)}
+.article-card__more{
+  font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#fff;
+}
+.article-card:hover .article-card__more{color:var(--ember-500)}
+
+.article-card--highlight{background:var(--ember-600);border-color:transparent}
+.article-card--highlight p{color:rgba(255,255,255,0.85)}
+.article-card--highlight .article-card__date{color:rgba(255,255,255,0.7)}
+.article-card--highlight .badge{background:var(--black-1)}
+.article-card--highlight:hover .article-card__more{color:#fff}
+
+/* --- Fields (forms/Input.jsx, Select.jsx) ------------------------------- */
+.field{display:flex;flex-direction:column;gap:8px}
+.field__label{
+  font-size:11px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.input,.select,.textarea{
+  width:100%;
+  background:var(--black-2);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-xs);
+  padding:13px 16px;
+  font-family:var(--font-body);font-size:15px;color:#fff;
+  outline:none;
+  transition:border-color var(--dur-fast) var(--ease-liquid),
+             box-shadow var(--dur-fast) var(--ease-liquid);
+}
+.textarea{resize:vertical;min-height:120px;line-height:1.6}
+.select{
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.45)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+  padding-right:42px;
+}
+.select option{background:var(--black-2);color:#fff}
+.input::placeholder,.textarea::placeholder{color:var(--fg-4)}
+.input:focus,.select:focus,.textarea:focus{
+  border-color:var(--border-accent);box-shadow:var(--focus-ring);
+}
+.input[aria-invalid="true"],.textarea[aria-invalid="true"],.select[aria-invalid="true"]{
+  border-color:var(--danger);
+}
+.field__error{
+  font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+  font-weight:700;color:var(--danger);min-height:0;
+}
+.field__error:empty{display:none}
+
+/* Checkbox (forms/Checkbox.jsx) */
+.checkbox{display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:13px;color:var(--fg-3);line-height:1.5}
+.checkbox input{
+  appearance:none;-webkit-appearance:none;
+  width:18px;height:18px;flex-shrink:0;margin:2px 0 0;
+  background:var(--black-2);border:1px solid var(--border-strong);
+  border-radius:var(--radius-xs);cursor:pointer;
+  transition:all var(--dur-fast) var(--ease-liquid);
+}
+.checkbox input:checked{background:var(--ember-grad);border-color:transparent}
+.checkbox input:checked::after{
+  content:"";display:block;width:5px;height:9px;margin:2px auto 0;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
+}
+
+/* --- Dialog (surfaces/Dialog.jsx) --------------------------------------- */
+.dialog{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:rgba(5,5,6,0.6);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:0;visibility:hidden;
+  /* visibility flips instantly on open (so focus() lands) and is delayed on
+     close (so the fade-out is still seen). */
+  transition:opacity var(--dur-med) var(--ease-liquid),visibility 0s var(--dur-med);
+}
+.dialog[data-open="true"]{
+  opacity:1;visibility:visible;
+  transition:opacity var(--dur-med) var(--ease-liquid),visibility 0s 0s;
+}
+.dialog__panel{
+  width:min(480px,90vw);max-height:calc(100vh - 48px);overflow-y:auto;
+  padding:32px;
+  background:var(--glass-bg-strong);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-glass);
+  transform:translateY(12px) scale(0.98);
+  transition:transform var(--dur-med) var(--ease-liquid);
+}
+.dialog[data-open="true"] .dialog__panel{transform:none}
+.dialog__head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.dialog__head h3{margin:0;font-size:22px}
+.dialog__close{
+  background:none;border:none;color:var(--fg-3);font-size:16px;
+  cursor:pointer;padding:4px;line-height:1;
+}
+.dialog__close:hover{color:#fff}
+.dialog__body{margin-top:16px;font-size:15px;color:var(--fg-2);line-height:1.6}
+.dialog__foot{margin-top:24px;display:flex;gap:12px;justify-content:flex-end}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .dialog{background:rgba(5,5,6,0.88)}
+  .dialog__panel{background:rgba(28,28,32,0.96)}
+}
+
+/* --- Toast (feedback/Toast.jsx) ----------------------------------------- */
+.toast-region{position:fixed;right:24px;bottom:24px;z-index:1100;display:flex;flex-direction:column;gap:12px}
+.toast{
+  display:flex;gap:14px;align-items:flex-start;
+  min-width:280px;max-width:360px;padding:16px 18px;
+  background:var(--glass-bg-strong);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-glass);
+  color:#fff;
+  animation:toast-in var(--dur-med) var(--ease-liquid) both;
+}
+.toast__dot{width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0;margin-top:6px}
+.toast__title{font-size:13px;font-weight:700;letter-spacing:0.04em}
+.toast__msg{font-size:12px;color:rgba(255,255,255,0.75);margin-top:2px;line-height:1.5}
+.toast__close{background:none;border:none;color:var(--fg-3);cursor:pointer;font-size:13px;padding:0 0 0 8px;margin-left:auto}
+.toast__close:hover{color:#fff}
+.toast[data-leaving="true"]{animation:toast-out var(--dur-med) var(--ease-liquid) both}
+@keyframes toast-in{from{opacity:0;transform:translateY(16px) scale(0.96)}to{opacity:1;transform:none}}
+@keyframes toast-out{to{opacity:0;transform:translateY(8px) scale(0.98)}}
+@media (max-width:520px){
+  .toast-region{right:16px;left:16px;bottom:16px}
+  .toast{min-width:0;max-width:none}
+}
+
+/* --- Photo plate --------------------------------------------------------
+   The design project shipped only low-res screenshot crops, and the hero image
+   was an <image-slot>. A plate renders an ember duotone field when empty and
+   passes a real photograph straight through once one is dropped in:
+     <div class="plate" style="--photo:url('assets/hero.jpg')"></div>
+   ---------------------------------------------------------------------- */
+.plate{
+  position:relative;overflow:hidden;
+  /* Declared here, not on :root, so per-element --plate-x/y/angle overrides
+     actually re-resolve. Near-black with warm ember rim lighting and a
+     diagonal shaft, per the imagery guideline. */
+  --plate-grad:
+    linear-gradient(var(--plate-angle),transparent 34%,rgba(255,122,72,0.16) 44%,rgba(255,122,72,0.03) 50%,transparent 58%),
+    radial-gradient(46% 40% at var(--plate-x) var(--plate-y),rgba(255,138,88,0.75) 0%,rgba(232,57,31,0.30) 38%,transparent 72%),
+    radial-gradient(80% 68% at 14% 108%,rgba(122,28,15,0.90) 0%,transparent 58%),
+    linear-gradient(158deg,#212127 0%,#101014 44%,#050506 100%);
+  background:var(--plate-grad);
+  background-size:cover;background-position:center;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.07);
+  isolation:isolate;
+}
+.plate[style*="--photo"]{background-image:var(--photo),var(--plate-grad)}
+/* Ember grade over any supplied photograph, per the imagery guideline. */
+.plate::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(200deg,rgba(232,57,31,0.22) 0%,transparent 45%,rgba(5,5,6,0.55) 100%);
+  mix-blend-mode:multiply;
+}
+/* Grain, so the near-black falloff never bands. */
+.plate::after{
+  content:"";position:absolute;inset:-20%;z-index:2;
+  background:var(--grain);opacity:0.22;pointer-events:none;
+}
+/* Production photography. The --photo custom property is fine for decorative
+   fills, but a real <img> child is what you want for anything meaningful:
+   it carries alt text, srcset and loading="lazy", and search engines index it.
+   The ember grade (::before, z1) and grain (::after, z2) composite over it. */
+.plate > img{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.plate--flat::before{display:none}
+.plate--soft::after{opacity:0.08}
+
+/* Lighting variants. Applied automatically across card grids so repeated
+   placeholders read as different frames rather than one tiled asset. */
+.plate--v2{--plate-x:24%;--plate-y:12%;--plate-angle:64deg}
+.plate--v3{--plate-x:60%;--plate-y:-4%;--plate-angle:142deg}
+.grid-3 > :nth-child(3n+2) .plate,
+.grid-4 > :nth-child(4n+2) .plate{--plate-x:24%;--plate-y:12%;--plate-angle:64deg}
+.grid-3 > :nth-child(3n) .plate,
+.grid-4 > :nth-child(4n+3) .plate{--plate-x:60%;--plate-y:-4%;--plate-angle:142deg}
+.grid-4 > :nth-child(4n) .plate{--plate-x:88%;--plate-y:22%;--plate-angle:96deg}
+
+/* --- Section head (ui_kits/website/sections.jsx → SectionHead) ---------- */
+.section-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:40px;margin-bottom:48px;
+}
+.section-head h2{font-size:var(--text-h2-fluid);margin:14px 0 0;line-height:1.02;white-space:pre-line}
+.section-head__aside{max-width:300px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.section-head__aside p{margin:0;font-size:14.5px;line-height:1.62;color:var(--fg-3)}
+@media (max-width:860px){
+  .section-head{flex-direction:column;align-items:flex-start;gap:24px;margin-bottom:36px}
+  .section-head__aside{max-width:none}
+}

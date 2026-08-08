@@ -1,0 +1,14 @@
+/* Marcus Reid — spacing, layout and radii tokens */
+:root{
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:140px;
+--page-max:1200px;--page-pad:40px;--section-gap:var(--space-10);
+--radius-xs:4px;--radius-sm:8px;--radius-md:14px;--radius-lg:22px;--radius-pill:999px;
+}
+/* Site extension: the kit is desktop-only (min-width 1280px). Tighten the
+   gutter and section rhythm as the viewport narrows. */
+@media (max-width:860px){
+  :root{--page-pad:24px;--section-gap:var(--space-9)}
+}
+@media (max-width:520px){
+  :root{--page-pad:20px;--section-gap:var(--space-8)}
+}

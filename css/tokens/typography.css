@@ -1,0 +1,64 @@
+/* Marcus Reid — type tokens. Archivo stands in for the unidentified grotesque
+   in the source screenshot (likely Helvetica Now / Neue Haas). Swap the family
+   here if real font files ever land. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap');
+:root{
+--font-display:'Archivo',-apple-system,'Helvetica Neue',sans-serif;
+--font-body:'Archivo',-apple-system,'Helvetica Neue',sans-serif;
+/* Site extension — running text.
+   The kit sets body copy in the same grotesque as the display type, which
+   reads flat over more than a line or two. Newsreader is a variable serif
+   built for long-form screen reading: real optical sizing, moderate stroke
+   contrast (so it does not go spindly white-on-black), and enough character
+   to feel deliberate against Archivo's heavy caps. UI text — labels, buttons,
+   nav, figures, badges — stays Archivo. */
+--font-prose:'Newsreader',Georgia,'Times New Roman',serif;
+--leading-prose:1.7;
+/* Scale */
+--text-hero:clamp(56px,7vw,96px);--text-h1:64px;--text-h2:44px;--text-h3:24px;--text-h4:18px;
+--text-lg:17px;--text-md:15px;--text-sm:13px;--text-label:11px;
+/* Weights */
+--weight-heading:800;--weight-stat:600;--weight-body:400;--weight-medium:500;--weight-bold:700;
+/* Rhythm */
+--leading-display:0.96;--leading-heading:1.05;--leading-body:1.6;
+--tracking-display:-0.02em;--tracking-label:0.22em;
+
+/* Site extension: fluid versions of the fixed display steps so the same
+   headlines survive below the kit's 1280px desktop assumption. */
+--text-h1-fluid:clamp(40px,5.4vw,64px);
+--text-h2-fluid:clamp(30px,4vw,44px);
+--text-h3-fluid:clamp(20px,2vw,24px);
+}
+h1,h2,h3,.display{font-family:var(--font-display);font-weight:var(--weight-heading);text-transform:uppercase;letter-spacing:var(--tracking-display);line-height:var(--leading-heading);color:var(--text-heading)}
+.eyebrow{font-family:var(--font-body);font-size:var(--text-label);font-weight:var(--weight-bold);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-accent)}
+
+/* Running text. Everything here is a sentence a visitor actually reads, as
+   opposed to a label they scan. Sizes run a step larger than the sans
+   equivalents — a serif needs it to hold the same optical weight. */
+.lede,
+.page-header__lede,
+.footer__blurb,
+.section-head__aside p,
+.split__body p,
+.hero__copy p,
+.cta-band__aside p,
+.step p,
+.program-row > div > p,
+.program-card p,
+.article-card p,
+.featured__body p,
+.faq details p,
+.prose p,
+.prose li,
+.quote blockquote,
+.fees__note{
+  font-family:var(--font-prose);
+  font-optical-sizing:auto;
+  /* 420, not 400. The global antialiased smoothing thins light-on-dark text,
+     and a serif loses more to it than a grotesque does. Newsreader is variable
+     across 300–600, so this is a real weight, not a synthesised one. */
+  font-weight:420;
+  letter-spacing:0;
+  text-wrap:pretty;
+}
+h1,h2,h3,.display{text-wrap:balance}

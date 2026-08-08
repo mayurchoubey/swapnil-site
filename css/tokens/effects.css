@@ -1,0 +1,27 @@
+/* Marcus Reid — shadows, motion and the liquid-glass primitive */
+:root{
+--shadow-card:0 1px 0 rgba(255,255,255,0.04) inset,0 12px 32px rgba(0,0,0,0.45);
+--shadow-glass:inset 0 1px 0 var(--glass-highlight),inset 0 -1px 0 rgba(255,255,255,0.08),0 20px 50px rgba(0,0,0,0.45);
+--shadow-accent:0 8px 28px rgba(232,57,31,0.4);
+--ease-liquid:cubic-bezier(0.32,0.72,0,1);
+--dur-fast:160ms;--dur-med:320ms;--dur-slow:600ms;
+}
+.glass{
+  background:var(--glass-bg);
+  -webkit-backdrop-filter:var(--glass-blur);
+  backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-glass);
+}
+.glass--strong{background:var(--glass-bg-strong)}
+.glass--ember{background:var(--glass-tint-ember)}
+.glass--lg{border-radius:var(--radius-lg)}
+.glass--pill{border-radius:var(--radius-pill)}
+
+/* Browsers without backdrop-filter get a solid-enough fallback rather than a
+   washed-out translucent block over dark photography. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .glass{background:rgba(28,28,32,0.92)}
+  .glass--ember{background:rgba(150,40,24,0.92)}
+}

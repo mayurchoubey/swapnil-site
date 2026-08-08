@@ -1,0 +1,11 @@
+/* Coach Swapnil — design system entry point.
+   Mirrors styles.css from the Claude Design project.
+
+   NOTE: the ?v= query must be bumped here as well as on the <link> tags in the
+   HTML. A version on styles.css alone does not invalidate these @imports, so
+   token edits appear to have no effect until the browser is hard-reloaded. */
+@import './tokens/typography.css?v=11';
+@import './tokens/colors.css?v=11';
+@import './tokens/spacing.css?v=11';
+@import './tokens/effects.css?v=11';
+@import './tokens/base.css?v=11';
