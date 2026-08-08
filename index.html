@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=15">
-<link rel="stylesheet" href="css/components.css?v=15">
-<link rel="stylesheet" href="css/layout.css?v=15">
+<link rel="stylesheet" href="css/styles.css?v=17">
+<link rel="stylesheet" href="css/components.css?v=17">
+<link rel="stylesheet" href="css/layout.css?v=17">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -45,11 +45,12 @@
   <section class="hero" id="top">
     <div class="hero__watermark" aria-hidden="true">Coach<br>Swapnil</div>
 
-    <!-- The hero backdrop is a graded studio photograph set in CSS (.hero).
-         When a cut-out photograph of Swapnil is available, add it back here:
-         <picture class="hero__photo"><img src="assets/swapnil-hero.png"
-           alt="Coach Swapnil"></picture>
-         The .hero__photo rules are still in layout.css, ready for it. -->
+    <picture class="hero__photo">
+      <source srcset="assets/swapnil-hero.webp" type="image/webp">
+      <img src="assets/swapnil-hero.png"
+           alt="Coach Swapnil, certified fitness trainer, arms folded"
+           width="1001" height="1500" fetchpriority="high" decoding="async">
+    </picture>
     <div class="hero__scrim" aria-hidden="true"></div>
 
     <div class="hero__inner">
@@ -671,6 +672,6 @@ Limited</h2>
   </div>
 </footer>
 
-<script src="js/site.js?v=15"></script>
+<script src="js/site.js?v=17"></script>
 </body>
 </html>

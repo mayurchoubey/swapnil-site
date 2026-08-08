@@ -292,10 +292,14 @@
   .hero__copy p{max-width:460px}
   /* In-flow and centred once the hero stacks. Above the scrim, or its
      darkening washes the subject out. */
-  .hero__photo{
+  /* :has(img) is (0,1,1) and would otherwise outrank a bare .hero__photo here,
+     leaving the desktop sizing in place on mobile — a cropped forehead filling
+     the screen. Both states must be named. */
+  .hero__photo,
+  .hero__photo:has(img){
     order:2;z-index:4;
     position:relative;left:auto;bottom:auto;transform:none;
-    height:340px;align-self:center;margin-bottom:24px;
+    width:auto;height:320px;align-self:center;margin-bottom:24px;
   }
   .hero__stats{
     order:3;
