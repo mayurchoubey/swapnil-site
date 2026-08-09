@@ -390,8 +390,15 @@
 .step h3{font-size:17px;margin:22px 0 10px}
 .step p{margin:0;font-size:14.5px;color:var(--fg-3);line-height:1.62}
 /* Thumbnail at the head of a step card. Bleeds to the card's edges by
-   cancelling its padding, so the image meets the dividing rules. */
+   cancelling its padding, so the image meets the dividing rules.
+   The index precedes it in source order (it reads better that way for
+   screen readers), so the card is a flex column and the media is pulled to
+   the front with `order`. Do NOT do this by giving the media a negative
+   top margin large enough to clear the index — that slides the image over
+   the number and guillotines it. */
+.step:has(.step__media){display:flex;flex-direction:column}
 .step__media{
+  order:-1;
   display:block;margin:-30px -20px 22px;
   aspect-ratio:4/3;overflow:hidden;
   border-bottom:1px solid var(--border-subtle);
@@ -411,14 +418,23 @@
   background:var(--black-0);
 }
 .band img{width:100%;height:100%;object-fit:cover;display:block}
-/* Feathers into the bands above and below so it reads as part of the page
-   rather than a pasted-in rectangle. */
+/* Feathers into the sections above and below so it reads as part of the page
+   rather than a pasted-in rectangle. The two stops are NOT interchangeable:
+   the top must fade to whatever #fees sits on (the body, --black-1) and the
+   bottom to whatever #about sits on (--black-0). Swap them and both edges
+   show a hard seam. */
+/* Grain and gradient are deliberately SEPARATE layers. Stacking them in one
+   background shares a single opacity, and the grain level that vanishes on a
+   near-black photo turns to visible speckle on a mid-tone one. */
+.band::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:var(--grain);opacity:0.05;
+}
 .band::after{
   content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    linear-gradient(to bottom,var(--black-0) 0%,transparent 22%,transparent 78%,var(--black-1) 100%),
-    var(--grain);
-  opacity:0.96;
+  background:linear-gradient(to bottom,
+    var(--black-1) 0%,rgba(11,11,13,0.35) 14%,transparent 30%,
+    transparent 70%,rgba(5,5,6,0.4) 86%,var(--black-0) 100%);
 }
 @supports (animation-timeline:view()){
   @media (prefers-reduced-motion:no-preference){
