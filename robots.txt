@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 
+# Source file for assets/og-image.jpg — rendered, not linked. Not a page.
+Disallow: /og-template.html
+
 # EDIT ON LAUNCH: replace with the real domain once it is pointed.
 Sitemap: https://REPLACE-WITH-YOUR-DOMAIN/sitemap.xml

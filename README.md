@@ -75,12 +75,12 @@ every other CTA on the page is already a bare `wa.me` link.
 
 ## Still needed before launch
 
-1. **An OG share image.** The page has `og:title` and `og:description` but no
-   `og:image`, so a link pasted into WhatsApp renders a bare preview card. Since
-   WhatsApp *is* the distribution channel, that card is the first impression for
-   almost every visitor — this is the highest-leverage item left.
-2. **A domain.** `robots.txt` and `sitemap.xml` both carry
-   `REPLACE-WITH-YOUR-DOMAIN` and must be edited once one exists.
+1. **A domain — this now blocks the share card.** Five places carry
+   `REPLACE-WITH-YOUR-DOMAIN`: `og:url`, `og:image`, `twitter:image`,
+   `robots.txt` and `sitemap.xml`. Find them with
+   `grep -rn REPLACE-WITH-YOUR-DOMAIN`. **`og:image` must be an absolute URL** —
+   WhatsApp, Facebook and LinkedIn scrapers do not reliably resolve relative
+   paths, so the preview card stays blank until this is done.
 3. **A portrait of Swapnil for `#about`.** The hero has him; the About section still
    uses studio atmosphere. Swap the `<img>` there.
 4. **Confirm the hero likeness with Swapnil.** It is his real photograph relit by AI
@@ -91,6 +91,25 @@ every other CTA on the page is already a bare `wa.me` link.
    well in it — change `.wordmark__name` and `.hero__watermark`.
 7. **A 404 page.** For a single-page site, the simplest correct answer is a host
    redirect of everything to `/`.
+
+### The share card
+
+`assets/og-image.jpg` (1200×630, 77 KB) is rendered from `og-template.html`, not
+composited by hand — the template pulls in the site's own stylesheets, so the card uses
+the real brand fonts and tokens and cannot drift from the page. To regenerate after a
+copy or price change:
+
+```bash
+python3 -m http.server 4321 &
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
+  --force-device-scale-factor=2 --virtual-time-budget=6000 --window-size=1200,630 \
+  --screenshot=/tmp/og-raw.png http://localhost:4321/og-template.html
+magick /tmp/og-raw.png -resize 1200x630 -strip -interlace Plane -quality 86 assets/og-image.jpg
+```
+
+Rendering at 2× then downsampling is what keeps the type crisp. Keep the file under
+about 300 KB or WhatsApp may decline to show a preview at all. `og-template.html` is
+`Disallow`ed in robots.txt — it is a source file, not a page.
 
 ## Slot sizes
 
