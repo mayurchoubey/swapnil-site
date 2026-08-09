@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EDIT ON LAUNCH: swap REPLACE-WITH-YOUR-DOMAIN for the real host.
-     Sitemaps require absolute URLs, so this file cannot be domain-agnostic.
-     One page, so one entry — the in-page anchors are not separate URLs and
-     must not be listed. -->
+<!-- Sitemaps require absolute URLs, so this cannot be domain-agnostic.
+     Swap the host when a custom domain lands.
+     One page, so one entry — the in-page anchors are not separate URLs. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN/</loc>
+    <loc>https://coach-swapnil.netlify.app/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

@@ -11,12 +11,15 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Coach Swapnil">
 <meta property="og:locale" content="en_IN">
-<!-- EDIT ON LAUNCH: og:url and og:image MUST be absolute URLs. Link-preview
-     scrapers (WhatsApp, Facebook, LinkedIn) do not reliably resolve relative
-     paths, so the card will not render until the real domain replaces
-     REPLACE-WITH-YOUR-DOMAIN in the two tags below. -->
-<meta property="og:url" content="https://REPLACE-WITH-YOUR-DOMAIN/">
-<meta property="og:image" content="https://REPLACE-WITH-YOUR-DOMAIN/assets/og-image.jpg">
+<!-- og:url, og:image and twitter:image MUST be absolute — link-preview scrapers
+     (WhatsApp, Facebook, LinkedIn) do not resolve relative paths, which is why
+     the card rendered blank while these held a placeholder.
+     WHEN A CUSTOM DOMAIN LANDS: find-and-replace coach-swapnil.netlify.app
+     across index.html, robots.txt and sitemap.xml, then force a re-scrape —
+     WhatsApp caches previews per URL and will otherwise keep serving the old
+     one. Appending ?v=2 to the shared link is the quickest way to bust it. -->
+<meta property="og:url" content="https://coach-swapnil.netlify.app/">
+<meta property="og:image" content="https://coach-swapnil.netlify.app/assets/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -24,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Coach Swapnil — Forge Your Best Self">
 <meta name="twitter:description" content="Small-group batches of 4–6 and 1-on-1 personal training. From ₹4,000/month.">
-<meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN/assets/og-image.jpg">
+<meta name="twitter:image" content="https://coach-swapnil.netlify.app/assets/og-image.jpg">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
