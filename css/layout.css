@@ -472,13 +472,6 @@
   .step{border-right:0}
 }
 
-/* --- Stat band ----------------------------------------------------------- */
-.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.stat-band .glass{padding:26px 24px}
-.stat-band .stat__label{max-width:none}
-@media (max-width:860px){.stat-band{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:460px){.stat-band{grid-template-columns:1fr}}
-
 /* --- Testimonials -------------------------------------------------------- */
 .quote{display:flex;flex-direction:column;gap:20px;padding:28px 26px}
 .quote blockquote{

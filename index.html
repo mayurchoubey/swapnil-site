@@ -36,9 +36,9 @@
      latin faces every view needs. latin-ext loads on demand via unicode-range. -->
 <link rel="preload" href="fonts/archivo-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/newsreader-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=22">
-<link rel="stylesheet" href="css/components.css?v=22">
-<link rel="stylesheet" href="css/layout.css?v=22">
+<link rel="stylesheet" href="css/styles.css?v=23">
+<link rel="stylesheet" href="css/components.css?v=23">
+<link rel="stylesheet" href="css/layout.css?v=23">
 <!-- Reveal tier, set before first paint so nothing flashes in then hides.
      .js-reveal   — scripting is on, so [data-reveal] may start hidden.
      .css-scroll  — scroll-driven animation is available; site.js then skips
@@ -484,32 +484,10 @@ Not Self-Taught</h2>
     </div>
   </section>
 
-  <!-- ============================= NUMBERS ============================ -->
-  <section class="section section--glow" aria-label="By the numbers">
-    <div class="shell">
-      <div class="stat-band" data-reveal-stagger>
-        <div class="glass" data-reveal>
-          <div class="stat__value"><span data-count="20">20</span>+</div>
-          <div class="stat__label">Years of coaching experience.</div>
-        </div>
-        <div class="glass" data-reveal>
-          <div class="stat__value"><span data-count="50">50</span></div>
-          <div class="stat__label">Minutes per session, structured start to finish.</div>
-        </div>
-        <div class="glass glass--ember" data-reveal>
-          <div class="stat__value"><span data-count="6">6</span></div>
-          <div class="stat__label">Members maximum in any group batch.</div>
-        </div>
-        <div class="glass" data-reveal>
-          <div class="stat__value"><span data-count="5">5</span></div>
-          <div class="stat__label">Training formats inside every program.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- =============================== FAQ ============================== -->
-  <section class="section section--band" id="faq" aria-labelledby="faqHead">
+  <!-- Plain, not section--band: the certifications block above it is a band,
+       and two of those in a row merge into one undivided slab. -->
+  <section class="section" id="faq" aria-labelledby="faqHead">
     <div class="shell">
       <div class="section-head" data-reveal>
         <div>
@@ -732,6 +710,6 @@ Limited</h2>
   </div>
 </footer>
 
-<script src="js/site.js?v=22"></script>
+<script src="js/site.js?v=23"></script>
 </body>
 </html>
