@@ -11,11 +11,15 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=18">
-<link rel="stylesheet" href="css/components.css?v=18">
-<link rel="stylesheet" href="css/layout.css?v=18">
+<link rel="manifest" href="site.webmanifest">
+<!-- Fonts are self-hosted. They sit three @imports deep, so the browser would
+     otherwise not discover them until the CSS chain resolves — preload the two
+     latin faces every view needs. latin-ext loads on demand via unicode-range. -->
+<link rel="preload" href="fonts/archivo-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/styles.css?v=19">
+<link rel="stylesheet" href="css/components.css?v=19">
+<link rel="stylesheet" href="css/layout.css?v=19">
 <!-- Reveal tier, set before first paint so nothing flashes in then hides.
      .js-reveal   — scripting is on, so [data-reveal] may start hidden.
      .css-scroll  — scroll-driven animation is available; site.js then skips
@@ -678,6 +682,6 @@ Limited</h2>
   </div>
 </footer>
 
-<script src="js/site.js?v=18"></script>
+<script src="js/site.js?v=19"></script>
 </body>
 </html>

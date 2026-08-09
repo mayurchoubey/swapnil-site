@@ -1,0 +1,33 @@
+# Read by Cloudflare Pages and Netlify. Ignored by a plain static server, so it
+# is harmless in local dev.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()
+
+# Fingerprinted by the ?v= query in the HTML, so a cached copy is only ever
+# reused for a URL that has not changed. Safe to pin for a year.
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts and images are content-addressed by filename — a new file means a new
+# name, never a mutated one.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The document itself must always revalidate, or the ?v= bumps inside it would
+# never reach anyone.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate

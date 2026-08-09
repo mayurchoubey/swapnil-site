@@ -75,24 +75,22 @@ every other CTA on the page is already a bare `wa.me` link.
 
 ## Still needed before launch
 
-1. **A photograph of Swapnil.** The page now has atmosphere imagery, but no picture of
-   the trainer. A booking site should show the person who will be in the room. Two slots
-   want him: the hero (a cut-out on a dark backdrop drops straight into `.hero__photo` —
-   the rules are still in `layout.css`, and there is a commented stub in the hero markup)
-   and the About section (swap the `<img>` in `#about`).
-2. **The articles are gone.** They were drafts I wrote carrying Swapnil's byline, and
-   they did not survive the move to one page. The originals are in `_archive/` if he
-   ever wants to review and reinstate them — but they need his approval first, since
-   they would publish under his name.
-3. **No testimonials.** The previous placeholder ones were invented and have been
-   removed. Add real ones only with client permission.
-4. **Surname / wordmark.** The design system's wordmark is two-tone, so it is set as
-   "Coach *Swapnil*". If Swapnil has a surname he wants used, that is a better fit —
-   change it in the `.wordmark` markup and the `.hero__watermark`.
-5. **A photo of the training space**, if there is a fixed one. The site currently says
-   "home or gym", which matches the brief.
-6. OG share image, `robots.txt`, `sitemap.xml`, a 404 page. (Favicon is done —
-   `assets/favicon-32.png` and `apple-touch-icon.png`, rendered from the logo mark.)
+1. **An OG share image.** The page has `og:title` and `og:description` but no
+   `og:image`, so a link pasted into WhatsApp renders a bare preview card. Since
+   WhatsApp *is* the distribution channel, that card is the first impression for
+   almost every visitor — this is the highest-leverage item left.
+2. **A domain.** `robots.txt` and `sitemap.xml` both carry
+   `REPLACE-WITH-YOUR-DOMAIN` and must be edited once one exists.
+3. **A portrait of Swapnil for `#about`.** The hero has him; the About section still
+   uses studio atmosphere. Swap the `<img>` there.
+4. **Confirm the hero likeness with Swapnil.** It is his real photograph relit by AI
+   (see the imagery note below). He should agree it reads as him.
+5. **No testimonials.** The earlier placeholders were invented and were removed. Add
+   real ones only with client permission.
+6. **Surname / wordmark.** The lockup reads "Coach *Swapnil*". A surname would sit
+   well in it — change `.wordmark__name` and `.hero__watermark`.
+7. **A 404 page.** For a single-page site, the simplest correct answer is a host
+   redirect of everything to `/`.
 
 ## Slot sizes
 
@@ -107,24 +105,62 @@ every other CTA on the page is already a bare `wa.me` link.
 ```
 index.html            the entire site
 css/
-  styles.css          entry point — @imports the five token files
+  styles.css          entry point — @imports fonts + the five token files
+  fonts.css           self-hosted @font-face declarations
   tokens/             colors, typography, spacing, effects, base
   components.css      design-system components as CSS classes
   layout.css          page chrome and section compositions
 js/
   site.js             all behavior, no dependencies
-assets/               five generated images, see note below
-_archive/             the old multipage HTML — DELETE THIS
+fonts/                Archivo + Newsreader woff2, latin & latin-ext
+assets/               images and icons
+robots.txt            EDIT ON LAUNCH — carries the sitemap URL
+sitemap.xml           EDIT ON LAUNCH — needs the real absolute domain
+site.webmanifest      name, theme colour, icons
+_headers              cache + security headers for Cloudflare Pages / Netlify
 ```
 
-`_archive/` holds the pre-consolidation `programs/about/contact/articles` pages. Nothing
-links to them, but a static host will still serve and index them. Delete before deploy:
+## Deploying
 
-```bash
-rm -rf _archive
+Static, no build step. **Cloudflare Pages** is the recommendation — free, works with a
+private repo, auto-deploys on push, and has the strongest Indian edge presence, which
+is where the audience is.
+
+```
+Workers & Pages → Create → Pages → Connect to Git → mayurchoubey/swapnil-site
+  Build command:     (leave empty)
+  Output directory:  /
 ```
 
-Asset links carry `?v=11`, in the `<link>`/`<script>` tags **and** in the `@import`s
+Netlify is equivalent. GitHub Pages will not serve a private repo without a paid plan.
+
+Every path in the site is relative, so it runs from a domain root or a subpath
+unchanged.
+
+**Two files must be edited the moment a domain exists:** `robots.txt` and `sitemap.xml`
+both contain `REPLACE-WITH-YOUR-DOMAIN`. Sitemaps require absolute URLs, so neither can
+be domain-agnostic.
+
+`_headers` pins `/css`, `/js`, `/fonts` and `/assets` for a year as `immutable`, which is
+only safe because of the `?v=` fingerprint — the document itself is set to revalidate
+every time, so a version bump always reaches people.
+
+### Fonts are self-hosted
+
+`fonts/` holds Archivo and Newsreader as variable woff2, latin and latin-ext, pulled
+from Google Fonts and served from the same origin. That removes a DNS lookup, a TLS
+handshake and a round trip to a third party before any text can render — worth real
+milliseconds on Indian mobile. Verified: the page makes **zero third-party requests**.
+
+latin-ext is not optional: it is the subset carrying **₹**, which the fee tables are
+full of. Google's own `unicode-range` declarations are preserved, so browsers still
+fetch only the subsets a view actually needs. Archivo italic is deliberately absent —
+nothing uses it; all three italic rules are Newsreader.
+
+The two latin faces are `<link rel="preload">`ed, because they sit three `@import`s deep
+and would otherwise not be discovered until the whole CSS chain resolves.
+
+Asset links carry `?v=19`, in the `<link>`/`<script>` tags **and** in the `@import`s
 inside `styles.css`. **Bump both on every deploy** — `python3 -m http.server` sends
 no cache-busting headers, and stale CSS/JS caused real confusion during the build.
 

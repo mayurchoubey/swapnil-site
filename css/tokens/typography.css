@@ -1,7 +1,8 @@
 /* Marcus Reid — type tokens. Archivo stands in for the unidentified grotesque
    in the source screenshot (likely Helvetica Now / Neue Haas). Swap the family
    here if real font files ever land. */
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap');
+/* Faces are declared in css/fonts.css, imported from styles.css ahead of this
+   file. Self-hosted — see the note there. */
 :root{
 --font-display:'Archivo',-apple-system,'Helvetica Neue',sans-serif;
 --font-body:'Archivo',-apple-system,'Helvetica Neue',sans-serif;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EDIT ON LAUNCH: swap REPLACE-WITH-YOUR-DOMAIN for the real host.
+     Sitemaps require absolute URLs, so this file cannot be domain-agnostic.
+     One page, so one entry — the in-page anchors are not separate URLs and
+     must not be listed. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://REPLACE-WITH-YOUR-DOMAIN/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

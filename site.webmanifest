@@ -1,0 +1,27 @@
+{
+  "name": "Coach Swapnil — Certified Fitness Trainer",
+  "short_name": "Coach Swapnil",
+  "description": "Small-group fitness batches of 4–6 and 1-on-1 personal training with Coach Swapnil.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0D",
+  "theme_color": "#0B0B0D",
+  "icons": [
+    {
+      "src": "assets/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
