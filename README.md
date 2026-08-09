@@ -81,15 +81,27 @@ every other CTA on the page is already a bare `wa.me` link.
    `grep -rn REPLACE-WITH-YOUR-DOMAIN`. **`og:image` must be an absolute URL** —
    WhatsApp, Facebook and LinkedIn scrapers do not reliably resolve relative
    paths, so the preview card stays blank until this is done.
-3. **A portrait of Swapnil for `#about`.** The hero has him; the About section still
+3. **Real certification badges.** The four seals in `#about` show the awarding bodies'
+   initials as a typographic placeholder — deliberately NOT a facsimile of anyone's
+   logo, since those are trademarks and an invented cert mark misrepresents an
+   accreditation. Most bodies issue official digital badges to the people they
+   certify, so Swapnil can likely download the real ISSA / PIA / Talwalkars / BFY
+   assets from his member portals. Drop one in as
+   `<span class="cert__seal"><img src="assets/cert-issa.png" alt="ISSA"></span>` —
+   the ring masks it automatically.
+4. **Real social URLs.** The three icons in the footer all point at `#`. Replace them,
+   and delete any row Swapnil does not actually use — a dead social icon costs more
+   trust than a missing one.
+5. **A portrait of Swapnil for `#about`.** The hero has him; the About section still
    uses studio atmosphere. Swap the `<img>` there.
-4. **Confirm the hero likeness with Swapnil.** It is his real photograph relit by AI
+6. **Confirm the hero likeness with Swapnil.** It is his real photograph relit by AI
    (see the imagery note below). He should agree it reads as him.
-5. **No testimonials.** The earlier placeholders were invented and were removed. Add
+7. **No testimonials.** The earlier placeholders were invented and were removed. Add
    real ones only with client permission.
-6. **Surname / wordmark.** The lockup reads "Coach *Swapnil*". A surname would sit
-   well in it — change `.wordmark__name` and `.hero__watermark`.
-7. **A 404 page.** For a single-page site, the simplest correct answer is a host
+8. **Wordmark surname.** The About copy now reads "Swapnil Abhyankar", but the lockup
+   and hero watermark still say just "Swapnil". Say the word and I will carry the
+   surname through both.
+9. **A 404 page.** For a single-page site, the simplest correct answer is a host
    redirect of everything to `/`.
 
 ### The share card

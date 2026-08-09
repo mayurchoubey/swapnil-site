@@ -246,6 +246,82 @@ a.wordmark:hover .wordmark__mark{
 .program-card--highlight .program-card__price span{color:rgba(255,255,255,0.75)}
 .program-card .link-arrow{margin-top:18px}
 
+/* --- Certification badges ------------------------------------------------
+   The seal is a TYPOGRAPHIC placeholder — the awarding body's initials set in
+   the brand face inside a ring. It is deliberately not a facsimile of anyone's
+   logo: those are trademarks, and an invented cert mark misrepresents an
+   accreditation.
+
+   Most bodies issue official digital badges to the people they certify, so
+   Swapnil can almost certainly download the real ones from his ISSA / PIA /
+   Talwalkars / BFY member portals. To drop one in, put an <img> inside the
+   seal — it will be masked to the circle and needs no other change:
+     <span class="cert__seal"><img src="assets/cert-issa.png" alt="ISSA"></span>
+   ---------------------------------------------------------------------- */
+.cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cert{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;
+  padding:32px 22px 28px;
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-sm);
+  transition:background var(--dur-med) var(--ease-liquid),
+             transform var(--dur-med) var(--ease-liquid),
+             border-color var(--dur-med) var(--ease-liquid);
+}
+.cert:hover{
+  background:var(--surface-card-hover);
+  border-color:var(--border-accent);
+  transform:translateY(-2px);
+}
+.cert__seal{
+  position:relative;flex:none;
+  width:84px;height:84px;
+  display:grid;place-items:center;
+  border-radius:50%;overflow:hidden;
+  border:1px solid rgba(255,90,44,0.45);
+  background:
+    radial-gradient(circle at 50% 26%,rgba(255,106,61,0.26) 0%,transparent 68%),
+    var(--black-3);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.10);
+  font-family:var(--font-display);font-weight:800;font-size:21px;
+  letter-spacing:0.06em;color:var(--ember-400);
+}
+.cert__seal img{width:100%;height:100%;object-fit:contain;padding:14px;background:#fff}
+.cert__name{
+  font-family:var(--font-body);font-weight:700;font-size:13.5px;
+  line-height:1.4;color:#fff;letter-spacing:0.01em;
+}
+.cert__label{
+  font-family:var(--font-body);font-size:10px;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;color:var(--fg-4);
+}
+@media (max-width:900px){.cert-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){
+  .cert-grid{grid-template-columns:1fr}
+  .cert{flex-direction:row;text-align:left;gap:18px;padding:20px}
+  .cert__seal{width:60px;height:60px;font-size:16px}
+}
+
+/* --- Social links --------------------------------------------------------
+   Every href is "#" until real profile URLs exist. See the note in the markup.
+   ---------------------------------------------------------------------- */
+.social{display:flex !important;gap:12px;list-style:none;margin:0;padding:0}
+.social a{
+  display:grid;place-items:center;width:40px;height:40px;
+  border:1px solid var(--border-strong);border-radius:var(--radius-sm);
+  color:var(--fg-2);
+  transition:color var(--dur-fast) var(--ease-liquid),
+             border-color var(--dur-fast) var(--ease-liquid),
+             background var(--dur-fast) var(--ease-liquid),
+             transform var(--dur-fast) var(--ease-liquid);
+}
+.social a:hover{
+  color:#fff;border-color:var(--border-accent);
+  background:rgba(232,57,31,0.14);transform:translateY(-1px);
+}
+.social svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6}
+
 /* --- Fee table ---------------------------------------------------------- */
 .fees{width:100%;border-collapse:collapse;text-align:left}
 .fees caption{

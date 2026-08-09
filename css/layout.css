@@ -389,6 +389,51 @@
 .step:hover .step__index{-webkit-text-stroke-color:var(--ember-500)}
 .step h3{font-size:17px;margin:22px 0 10px}
 .step p{margin:0;font-size:14.5px;color:var(--fg-3);line-height:1.62}
+/* Thumbnail at the head of a step card. Bleeds to the card's edges by
+   cancelling its padding, so the image meets the dividing rules. */
+.step__media{
+  display:block;margin:-30px -20px 22px;
+  aspect-ratio:4/3;overflow:hidden;
+  border-bottom:1px solid var(--border-subtle);
+}
+.step__media img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform var(--dur-slow) var(--ease-liquid);
+}
+.step:hover .step__media img{transform:scale(1.05)}
+
+/* --- Full-bleed band ------------------------------------------------------
+   A breather between two dense text sections. Decorative only, so the image
+   carries an empty alt and the section is hidden from assistive tech. */
+.band{
+  position:relative;overflow:hidden;
+  height:min(44vh,400px);
+  background:var(--black-0);
+}
+.band img{width:100%;height:100%;object-fit:cover;display:block}
+/* Feathers into the bands above and below so it reads as part of the page
+   rather than a pasted-in rectangle. */
+.band::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to bottom,var(--black-0) 0%,transparent 22%,transparent 78%,var(--black-1) 100%),
+    var(--grain);
+  opacity:0.96;
+}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .band img{
+      animation:band-drift linear both;
+      animation-timeline:view();
+      animation-range:cover 0% cover 100%;
+    }
+  }
+}
+@keyframes band-drift{
+  from{transform:scale(1.12) translateY(-2%)}
+  to{transform:scale(1.12) translateY(2%)}
+}
+
 .steps--5{grid-template-columns:repeat(5,1fr)}
 .steps--5 .step{padding:30px 20px 34px}
 .steps--5 .step h3{font-size:15px}
